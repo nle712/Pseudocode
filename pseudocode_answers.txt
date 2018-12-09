@@ -7,42 +7,52 @@ If you run pseudocode on your computer what would happen?
 The computer would not be able to run the code.
 
 
+
+
 Programming Assignment
 
 Write the following algorithms in pseudocode:
 
 Create a function that takes two numbers and prints out the greater number.
 
-INPUT first number
-INPUT second number
-IF the first number is greater than the second number
-PRINT first number
-ELSE
-PRINT second number
-END IF
+FUNCTION greaterNumber(num1, num2)
+  IF the first number is greater than the second number
+    PRINT first number
+  ELSE
+    PRINT second number
+ END IF
+END FUNCTION
+
+
+
 
 Create a function that prints out the numbers from 1 to 100.
 
-INIT total to 1
-FOR num less than 100 increase by one
-            PRINT num
-END FOR
+FUNCTION printNumber(num)
+  INIT total to 1
+   FOR num less than 100 increase by one
+    PRINT num
+  END FOR
+END FUNCITON
+
+
 
 
 Create a function that searches for a specific entry in a phonebook.
 
-INIT phonebook obj
-FOR the length of obj increase by one
-            IF phonebook at index I is equal to phonebook item
-                        PRINT “I found the person”
-            END IF
-END FOR
-ELSE “could not find person”
+FUNCTION searchEntry(obj)
+  FOR the length of obj increase by one
+    IF phonebook at index I is equal to phonebook item
+      PRINT “I found the person”
+    END IF
+  END FOR
+ ELSE “could not find person”
+END FUNCTION
  
  
 Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
 
-function phonebook(obj) {
+function searchEntry(obj) {
  for(let i = 0; i < arr.length; i++){
   if(obj[i] === obj){
    console.log("I found the person")
@@ -51,3 +61,4 @@ function phonebook(obj) {
    return "Could not find person"
  }
 }
+
