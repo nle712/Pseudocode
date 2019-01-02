@@ -85,4 +85,13 @@ console.log(funPark)
 
 2. Provide another real-world example that you can model using a data structure.
 
+Another real-world example that I can use data structure for is the possible moves in the game of chess.
+
+
 3. How would your data structure allow developers to access and manipulate the data?
+
+The data structure would map out all of the possible next moves and what can branch off from that move.
+Say by moving the pawn 1 space forward and the opponent then sees that the rook is now open they will move their chess piece to take the rook, but
+if they do that move what then happens to their chess piece. It will allow developers to see all of the steps that can then occur.
+They are able to access the data and can manipulate a move by instead of doing one move forward on the chess board they might move to the left or right.
+They are able to manipulate the data and change it as necessary.
