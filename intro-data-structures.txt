@@ -39,34 +39,35 @@ class AmusementPark {
   insert(name, index) {
     if(index) {
       this.line.splice(index, 0, name);
-    }else {
+    } else {
       this.line.push(name);
     }
   }
 
   find(name) {
-    return this.line.indexOf(name);
+    if(name){
+     this.line.indexOf(name);
+    } else {
+      console.log("there is noone here with that name");
+    }
   }
 
-  remove() {
-    //splice
+  remove(name, index) {
+    return this.line.splice(index, 1, name);
   }
-//insert person in arr
-// find person in arr
-// delete person in arr
-}
 
 
 
-let visitors = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+  let visitors = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
 
-const funPark = new AmusementPark(visitors);
+  const funPark = new AmusementPark(visitors);
 
-funPark.insert("Mary");
-funPark.insert("Jack", 3);
-console.log(funPark.find("Ava"));
-
-console.log(funPark)
+  funPark.insert("Mary");
+  funPark.insert("Melissa", 1);
+  //funPark.remove(4,4)
+  console.log(funPark.find("Josh"));
+  console.log(funPark.find("Emily"))
+  console.log(funPark)
 
 
 
