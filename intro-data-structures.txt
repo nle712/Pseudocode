@@ -45,44 +45,30 @@ class AmusementPark {
   }
 
   find(name) {
-    if(name){
-     this.line.indexOf(name);
-    } else {
-      console.log("there is noone here with that name");
+    const indexOf = this.line.indexOf(name);
+    if(indexOf >= 0) {
+      return indexOf;
     }
+      return "there is noone here with that name";
   }
 
-  remove(name, index) {
-    return this.line.splice(index, 1, name);
+  remove(name) {
+    const indexOf = this.line.indexOf(name);
+    this.line.splice(indexOf, 1);
+    return this.line;
   }
+}
 
+let visitors = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
 
+const funPark = new AmusementPark(visitors);
 
-  let visitors = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
-
-  const funPark = new AmusementPark(visitors);
-
-  funPark.insert("Mary");
-  funPark.insert("Melissa", 1);
-  //funPark.remove(4,4)
-  console.log(funPark.find("Josh"));
-  console.log(funPark.find("Emily"))
-  console.log(funPark)
-
-
-
-  // console.log(amusementPark.push("Mary"));
-  // for(let i = 0; i < arr.length; i++) {
-  //   if(arr[i] === "Josh") {
-  //     console.log(i);
-  //   }
-  //   else if(arr[i] === "Emily") {
-  //     console.log(i);
-  //   }
-  // }
-  // else {
-  //   console.log("There is no one named Emily in the line");
-  // }
+funPark.insert("Mary");
+funPark.insert("Melissa", 1);
+console.log(funPark.find("Josh"));
+console.log(funPark.find("Emily"));
+console.log(funPark.remove("Patrick"));
+console.log(funPark);
 
 2. Provide another real-world example that you can model using a data structure.
 
