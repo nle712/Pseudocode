@@ -18,9 +18,9 @@ A:Hash tables are used as a collection of similar data, while objects can hold d
 Determine whether you would use a hash table or an object to store each of the following pieces of data:
 A list of pets and their unique names.- Hash table
 The name, age, and the birthday of your best friend. - Object
-The name and location of every company in a given city. - Object
+The name and location of every company in a given city. - Hash Table
 All of the books checked out from a library by a particular individual. - Hash table
-The primary and secondary phone numbers for a contact. - Hash table
+The primary and secondary phone numbers for a contact. - Object
 
 Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 
@@ -149,41 +149,43 @@ Build a system that allows digital copies of newspapers to be entered and search
 
 
 let hash = (string, max)=> {
-  var hash = 0;
-  for(var i=0; i< string.length;i++){
+  let hash = 0;
+  for(let i=0; i< string.length;i++) {
     hash+= string.charCodeAt(i);
   }
   return hash % max;
-}
+};
 
 class Newspaper {
   constructor() {
     this.storage = [];
     this.storageLimit = 60;
-  }
 
-  add(publisher, pubDate) {
-    let key = publisher + pubDate;
-    let index = hash(key, this.storageLimit);
-    let data = [publisher, pubDate];
-      if (this.storage[index] === undefined) {
-        this.storage[index] = [ ];
+
+    this.add = function(publisher, pubDate) {
+      let key = publisher + pubDate;
+      let index = hash(key, this.storageLimit);
+      let data = [publisher, pubDate];
+        if (this.storage[index] === undefined) {
+          this.storage[index] = [ ];
+      }this.storage[index].push(data);
     }
-    this.storage[index].push(data);
-    }
 
-  search(publisher, pubDate) {
-    let key = publisher + pubDate;
-    let index = hash(key, this.storageLimit);
-    let result = [];
+    this.search = function(publisher, pubDate) {
+      let key = publisher + pubDate;
+      let index = hash(key, this.storageLimit);
+      let result = [];
 
-    if (!this.storage[index]) { return 'No results were found for this search' }
-      this.storage[index].forEach(entry => {
-       if (entry[0] === publisher && entry[1] === pubDate) {
-        result.push(entry);
+      if (!this.storage[index]) {
+        return 'No results were found for this search'
       }
-    })
-    return result;
+        this.storage[index].forEach(entry => {
+        if (entry[0] === publisher && entry[1] === pubDate) {
+          result.push(entry);
+        }
+      })
+      return result;
+    }
   }
 }
 
