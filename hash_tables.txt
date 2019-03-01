@@ -161,29 +161,29 @@ class Newspaper {
     this.storage = [];
     this.storageLimit = 60;
 
-
-    this.add = function(publisher, pubDate) {
-      let key = publisher + pubDate;
+    this.add = function(singleNewspaper) {
+      let key = singleNewspaper.publisher + singleNewspaper.pubDate;
       let index = hash(key, this.storageLimit);
-      let data = [publisher, pubDate];
-        if (this.storage[index] === undefined) {
-          this.storage[index] = [ ];
-      }this.storage[index].push(data);
+      let data = [singleNewspaper.publisher, singleNewspaper.pubDate];
+      if (this.storage[index] === undefined) {
+        this.storage[index] = [];
+      }
+      this.storage[index].push(data);
     }
 
-    this.search = function(publisher, pubDate) {
-      let key = publisher + pubDate;
+    this.find = function(singleNewspaper) {
+      let key = singleNewspaper.publisher + singleNewspaper.pubDate;
       let index = hash(key, this.storageLimit);
       let result = [];
 
       if (!this.storage[index]) {
         return 'No results were found for this search'
       }
-        this.storage[index].forEach(entry => {
-        if (entry[0] === publisher && entry[1] === pubDate) {
+      this.storage[index].forEach(entry => {
+        if (entry[0] === singleNewspaper.publisher && entry[1] === singleNewspaper.pubDate) {
           result.push(entry);
         }
-      })
+      });
       return result;
     }
   }
@@ -191,8 +191,21 @@ class Newspaper {
 
 
 let news = new Newspaper();
-news.add('Skyhorse', '2019');
-news.add('Penguin', '1995');
-news.add('Springer','2007');
+news.add({
+  publisher:'Skyhorse',
+  pubDate: '01-05-2019'
+});
 
-console.log(news.search('Skyhorse', '2019'));
+news.add({
+  publisher:'Penguin',
+  pubDate: '12-13-1995'
+});
+news.add({
+  publisher:'Springer',
+  pubDate: '10-09-2007'
+});
+
+console.log(news.find({
+  publisher:'Skyhorse',
+  pubDate: '01-05-2019'
+}));
