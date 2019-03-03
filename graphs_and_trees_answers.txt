@@ -20,4 +20,238 @@ A:  An Undirected, a-cyclic, unweighted graph is when two nodes do not have a se
 
 6.	What kind of graph is a binary search tree?
 
-A: A Binary search tree is a Directed, A-cyclic, unweighted tree. 
+A: A Binary search tree is a Directed, A-cyclic, unweighted tree.
+
+Coding Exercises:
+
+/* Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+Example: The value 10 exists in the tree. The value 23 does not exist in the tree. */
+ /* Start at the root and compare that value to the root. If it is higher than the root we travel down the left child and if it is less than the root we travel down to the right child. This process continues until value is found or there are no more nodes to check. It returns true if found and false if not. */
+
+ class Node {
+  constructor(data, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+class Tree {
+  constructor() {
+    this.root = null;
+  }
+
+  add(data) {
+    const node = this.root;
+    if (node === null) {
+      this.root = new Node(data);
+      return;
+    } else {
+      const searchTree = function(node) {
+        if (data < node.data) {
+          if (node.left === null) {
+            node.left = new Node(data);
+            return;
+          } else if (node.left !== null) {
+            return searchTree(node.left);
+          }
+        } else if (data > node.data) {
+          if (node.right === null) {
+            node.right = new Node(data);
+            return;
+          } else if (node.right !== null) {
+            return searchTree(node.right);
+          }
+        } else {
+          return null;
+        }
+      };
+      return searchTree(node);
+    }
+  }
+
+  find(data) {
+    let current = this.root;
+    while (current.data !== data) {
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+      if (current === null) {
+        return null;
+      }
+    }
+    return current;
+  }
+
+  isPresent(data) {
+    let current = this.root;
+    while (current) {
+      if (data === current.data) {
+        return true;
+      }
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+  }
+
+}
+
+const tree = new Tree();
+
+tree.add(10);
+tree.add(1);
+tree.add(14);
+tree.add(6);
+tree.add(7);
+tree.add(4);
+
+console.log(tree.isPresent(1));
+console.log(tree.isPresent(27));
+console.log(tree.isPresent(7));
+
+
+
+
+/* Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+To find the distance between teh two nodes start at the first node and make my way through all the nodes in order to get to the last node that I am wanting to end at */
+
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class Tree {
+  constructor() {
+    this.root = null;
+  }
+
+  findDistanceBetweenNodes(root, num1, num2) {
+    var lowestCommonAncestor = this.findCommonAncestor(root, num1, num2);
+    var distanceNode1ToRoot = this.countAncestors(lowestCommonAncestor, num1);
+    var distanceNode2ToRoot = this.countAncestors(lowestCommonAncestor, num2);
+    var distanceRootToAncestor = this.countAncestors(root,lowestCommonAncestor);
+    var totalDistance = (distanceNode1ToRoot + distanceNode2ToRoot) - (2 * distanceRootToAncestor);
+    return ('The distance between the two nodes is' + ' ' + totalDistance);
+  }
+
+  findCommonAncestor(root, num1, num2) {
+    if (!root) return;
+    var lowestCommonAncestor = root.data;
+    if (num1 === lowestCommonAncestor || num2 === lowestCommonAncestor) {
+      return lowestCommonAncestor;
+    }
+    if (num1 < lowestCommonAncestor && num2 < lowestCommonAncestor) {
+      return this.findCommonAncestor(root.left, num1, num2);
+    }
+    if (num1 > lowestCommonAncestor && num2 > lowestCommonAncestor) {
+      return this.findCommonAncestor(root.right, num1, num2);
+    }
+    return lowestCommonAncestor;
+  }
+
+  countAncestors(root, data) {
+    let thisNode = this.root;
+    let nodeCount = 0;
+    while (thisNode) {
+      if (data === thisNode.data) {
+        return nodeCount;
+      }
+      thisNode = data < thisNode.data ? thisNode.left : thisNode.right;
+      nodeCount++;
+    }
+  }
+
+  getRootNode() {
+    return this.root;
+  }
+
+ add(data) {
+    const node = this.root;
+    if (node === null) {
+      this.root = new Node(data);
+      return;
+    } else {
+      const searchTree = function(node) {
+        if (data < node.data) {
+          if (node.left === null) {
+            node.left = new Node(data);
+            return;
+          } else if (node.left !== null) {
+            return searchTree(node.left);
+          }
+        } else if (data > node.data) {
+          if (node.right === null) {
+            node.right = new Node(data);
+            return;
+          } else if (node.right !== null) {
+            return searchTree(node.right);
+          }
+        } else {
+          return null;
+        }
+      };
+      return searchTree(node);
+    }
+  }
+
+  find(data) {
+    let current = this.root;
+    while (current.data !== data) {
+
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+      if (current === null) {
+        return null;
+      }
+    }
+    return current;
+  }
+
+   isPresent(data) {
+    let current = this.root;
+    while (current) {
+      if (data === current.data) {
+        return true;
+      }
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+  }
+
+}
+
+var tree = new Tree();
+
+tree.add(8);
+tree.add(10);
+tree.add(3);
+tree.add(14);
+tree.add(6);
+tree.add(1);
+tree.add(13);
+tree.add(7);
+tree.add(4);
+
+var root = tree.getRootNode();
+tree.findDistanceBetweenNodes(root, 10, 4);
+tree.findDistanceBetweenNodes(root, 10, 10);
